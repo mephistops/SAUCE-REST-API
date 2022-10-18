@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="petrol_pumps_view" model="ir.ui.view">
+    <field name="name">Estaciones de Bombeo</field>
+    <field name="model">petrol.pumps</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="IdEstacion"/>
+        <field name="Nombre"/>
+      </tree>
+    </field>
+  </record>
+
+  
+  <record id="action_petrol_pumps" model="ir.actions.act_window">
+    <field name="name">Estaciones de Bombeo</field>
+    <field name="res_model">petrol.pumps</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem
+    id="action_petrol_pumps"
+    name="Estaciones de Bombeo"
+    action="action_petrol_pumps"/>
+</odoo>
