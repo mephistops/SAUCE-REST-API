@@ -12,5 +12,8 @@
         'security/ir.model.access.csv',
         'views/res_config_settings.xml',
         'views/petrol_pumps.xml',
+        'views/supply_points.xml',
     ],
+    'post_init_hook': 'post_init',
+    'pre_init_hook': 'pre_init'
 }

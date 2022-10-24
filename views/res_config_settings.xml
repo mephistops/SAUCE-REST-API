@@ -34,30 +34,8 @@
               </div>
             </div>
           </div>
-          <h2>
-						Ejecutar
-          </h2>
-          <div class="row mt16 o_settings_container">
-            <div class="col-xs-12 col-md-8 o_setting_box">
-              <div class="o_setting_right_pane">
-                <div class="content-group">
-                  <div class="row mt4">
-                    <div class="col-3">
-                      <button string="Cargar Paises" type="object" name="create_countries" class="oe_highlight" />
-                    </div>
-                    <div class="col-3">
-                      <button string="Cargar Productos" type="object" name="create_products" class="oe_highlight" />
-                    </div>
-                    <div class="col-3">
-                      <button string="Cargar Estaciones" type="object" name="create_petrol_pump" class="oe_highlight" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </xpath>
     </field>
-  </record>
+  </record>  
 </odoo>
