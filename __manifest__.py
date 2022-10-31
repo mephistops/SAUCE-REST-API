@@ -7,13 +7,16 @@
     'website': "##",
     'category': 'Products',
     'version': '1.0',
-    'depends': ['account'],
+    'depends': [
+        'hr',
+        'sale_management'
+    ],
     'data': [
         'security/ir.model.access.csv',
         'views/res_config_settings.xml',
         'views/petrol_pumps.xml',
+        'views/gas_suppliers.xml',
         'views/supply_points.xml',
+        'views/turns.xml',
     ],
-    'post_init_hook': 'post_init',
-    'pre_init_hook': 'pre_init'
 }

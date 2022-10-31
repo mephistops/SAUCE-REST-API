@@ -11,16 +11,4 @@
       </tree>
     </field>
   </record>
-  
-  <record id="supply_points_action" model="ir.actions.act_window">
-    <field name="name">Islas</field>
-    <field name="res_model">supply.points</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-  
-  <menuitem 
-    id="action_supply_points" 
-    action="supply_points_action"  
-    name="Islas"
-  />
 </odoo>

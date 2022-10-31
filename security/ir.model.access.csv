@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_petrol_pumps,petrol.pumps,model_petrol_pumps,base.group_user,1,0,1,0
 access_supply_points,supply.points,model_supply_points,base.group_user,1,0,1,0
+access_gas_suppliers,gas.suppliers,model_gas_suppliers,base.group_user,1,0,1,0
+access_turns,turns,model_turns,base.group_user,1,0,1,0

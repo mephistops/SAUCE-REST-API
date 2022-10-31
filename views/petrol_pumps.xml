@@ -10,15 +10,4 @@
       </tree>
     </field>
   </record>
-  
-  <record id="petrol_pumps_action" model="ir.actions.act_window">
-    <field name="name">Estaciones de Bombeo</field>
-    <field name="res_model">petrol.pumps</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-
-  <menuitem
-    id="action_petrol_pumps"
-    name="Estaciones de Bombeo"
-    action="petrol_pumps_action"/>
 </odoo>

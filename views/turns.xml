@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="turns_tree" model="ir.ui.view">
+    <field name="name">Turnos</field>
+    <field name="model">turns</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="IdTurno"/>
+        <field name="NumeroTurno"/>
+        <field name="FinalizaConsignacionSobre"/>
+        <field name="AjustadoPorOperacion"/>
+        <field name="EsCerrado"/>
+      </tree>
+    </field>
+  </record>
+</odoo>

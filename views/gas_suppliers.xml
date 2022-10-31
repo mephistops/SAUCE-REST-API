@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="gas_suppliers_tree" model="ir.ui.view">
+    <field name="name">Surtidores</field>
+    <field name="model">gas.suppliers</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="IdSurtidor"/>
+        <field name="Descripcion"/>
+      </tree>
+    </field>
+  </record>
+</odoo>
