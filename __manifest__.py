@@ -9,7 +9,7 @@
     'version': '1.0',
     'depends': [
         'hr',
-        'sale_management'
+        'sale'
     ],
     'data': [
         'security/ir.model.access.csv',

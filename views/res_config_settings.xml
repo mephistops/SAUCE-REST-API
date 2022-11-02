@@ -9,33 +9,6 @@
       <xpath expr="//div[hasclass('settings')]" position="inside">
         <div class="app_settings_block" data-string="Configuración API" string="Configuración API" data-key="invoice_config" groups="base.group_system">
           <h2>
-						Configuración
-          </h2>
-          <div class="row mt16 o_settings_container" id="invoice_config_settings" groups="base.group_system">
-            <div class="col-xs-12 col-md-8 o_setting_box">
-              <div class="o_setting_right_pane">
-                <div class="content-group">
-                  <div class="row mt4">
-                    <label for="psa_url" class="col-lg-3 o_light_label" />
-                    <field name="psa_url" />
-                  </div>
-                </div>
-                
-                <div class="content-group">
-                  <div class="row mt4">
-                    <label for="psa_username" class="col-lg-3 o_light_label" />
-                    <field name="psa_username" />
-                  </div>
-                  <div class="row mt14">
-                    <label for="psa_password" class="col-lg-3 o_light_label" />
-                    <field name="psa_password" password="1" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h2>
 						Ejecutar
           </h2>
           <div class="row mt16 o_settings_container">
@@ -57,7 +30,7 @@
 
                     <button string="Productos" type="object" name="products" class="oe_highlight m-2" />
 
-                    <button string="Facturas" type="object" name="saleOrders" class="oe_highlight m-2" />
+                    <button string="Facturas" type="object" name="sale_orders" class="oe_highlight m-2" />
                   </div>
                 </div>
               </div>
