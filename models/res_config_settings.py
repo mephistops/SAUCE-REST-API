@@ -185,7 +185,7 @@ class ResConfigSettings(models.TransientModel):
             date_order = venta['HoraInicio'].split('T')
 
             self.env['sale.order'].sudo().create({
-                    'partner_id': client['id'],
+                    'partner_id': 396,
                     'user_id': employee['id'],
                     'date_order': date_order[0],
                     'order_line': [(0, 0, {
