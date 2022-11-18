@@ -175,18 +175,10 @@ class ResConfigSettings(models.TransientModel):
 
         for venta in data['Resultado']:
             product = self.env['product.template'].search([('name', '=', venta['Producto']['Nombre'])])
-            if venta['Cliente'] != 'null':
-                client = self.env['res.partner'].search([('name', '=', venta['Cliente'])])
-            else:
-                client = self.env['res.partner'].search([('name', '=', 'VENTAS')])
-            
-            employee = self.env['hr.employee'].search([('name', '=', venta['Empleado']['Nombre'])])
-
             date_order = venta['HoraInicio'].split('T')
 
             self.env['sale.order'].sudo().create({
                     'partner_id': 396,
-                    'user_id': employee['id'],
                     'date_order': date_order[0],
                     'order_line': [(0, 0, {
                         'product_id': product['id'],
