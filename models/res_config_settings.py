@@ -109,7 +109,7 @@ class ResConfigSettings(models.TransientModel):
     def turns(self):
         employees = self.env['hr.employee']
         turns = self.env['turns']
-        all_records = employees.search([('1', '==', '1')])
+        all_records = employees.search([(1, '=', 1)])
         
         for item in all_records:
             data = self.get_data(f"Turnos/empleado/{item['IdEmpleado']}")       
@@ -171,18 +171,28 @@ class ResConfigSettings(models.TransientModel):
     def sale_orders(self):
         fecha = "2022-10-28"        
         data = self.get_data(f"/Estaciones/2215/ventas/date/{fecha}")
+        client = ''
 
-        for venta in data['Resultado']:   
+        for venta in data['Resultado']:
             product = self.env['product.template'].search([('name', '=', venta['Producto']['Nombre'])])
+            if venta['Cliente'] != 'null':
+                client = self.env['res.partner'].search([('name', '=', venta['Cliente'])])
+            else:
+                client = self.env['res.partner'].search([('name', '=', 'VENTAS')])
+            
+            employee = self.env['hr.employee'].search([('name', '=', venta['Empleado']['Nombre'])])
 
             date_order = venta['HoraInicio'].split('T')
 
             self.env['sale.order'].sudo().create({
-                    'partner_id': 392,
+                    'partner_id': client['id'],
+                    'user_id': employee['id'],
                     'date_order': date_order[0],
                     'order_line': [(0, 0, {
                         'product_id': product['id'],
-                        'price_unit': venta['Pagos'][0]['Valor'],
+                        'price_subtotal': venta['Valor'],
+                        'product_uom_qty': venta['Cantidad'],
+                        'price_unit': venta['Precio'],
                     })]
                 })
 
