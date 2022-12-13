@@ -9,5 +9,5 @@ class SupplyPoints(models.Model):
     IdIsla = fields.Char(string="Id", required=True, index=True)
     Codigo = fields.Char(string="Código", required=True)
     Nombre = fields.Char(string="Nombre")
-    IdEstacion = fields.Char(string="Id Estación", required=True)
+    IdEstacion = fields.Many2one('petrol.pumps',string="Estación")
     Estado = fields.Boolean(string="Estado")

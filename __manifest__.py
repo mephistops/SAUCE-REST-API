@@ -9,7 +9,8 @@
     'version': '1.0',
     'depends': [
         'hr',
-        'sale'
+        'sale',
+        'sale_automatic_workflow',
     ],
     'data': [
         'security/ir.model.access.csv',

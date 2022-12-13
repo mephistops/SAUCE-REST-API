@@ -3,3 +3,5 @@ access_petrol_pumps,petrol.pumps,model_petrol_pumps,base.group_user,1,0,1,0
 access_supply_points,supply.points,model_supply_points,base.group_user,1,0,1,0
 access_gas_suppliers,gas.suppliers,model_gas_suppliers,base.group_user,1,0,1,0
 access_turns,turns,model_turns,base.group_user,1,0,1,0
+access_Gas_api,Gas_api,model_gas_api,base.group_user,1,1,1,1
+access_payments_types,payments.types,model_payments_types,base.group_user,1,1,1,1
