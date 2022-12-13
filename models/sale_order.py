@@ -22,6 +22,7 @@ class SaleOrder(models.Model):
     FechaProximoMantenimiento = fields.Char(string="Fecha Proximo Mantenimiento")
     gas_api = fields.Many2one('gas.api','Venta desde Api')
     IdEmpleado = fields.Many2one('hr.employee',string="Empleado")
+    FormaDePago = fields.Char(string="Tipo de Pago")
     
     def prepare_sales_order_vals(self,value):
         self.default_get(value)
