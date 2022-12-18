@@ -4,10 +4,10 @@
     <field name="name">Order: add Turns</field>
     <field name="model">sale.order</field>
     <field name="inherit_id" ref="sale.view_order_form" />
-    <field name="arch" type="xml" />
-
-    <group name="partner_details" position="inside">
-      <field name="IdTurno"/>
-    </group>
+    <field name="arch" type="xml">
+      <group name="partner_details" position="inside">
+        <field name="IdTurno"/>
+      </group>
+    </field>    
   </record>
 </odoo>
