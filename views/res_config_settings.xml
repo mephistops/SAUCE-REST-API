@@ -21,7 +21,7 @@
           <field name="Cliente_final" />
           <field name="fecha" />
           <field name="flow" />
-          <field name="turns" />
+          <field name="IdTurno" />
         </group>
       </form>
     </field>
@@ -36,6 +36,7 @@
         <field name="Cliente_final" />
         <field name="fecha" />
         <field name="flow" />
+        <field name="IdTurno" />
       </tree>
     </field>
   </record>
