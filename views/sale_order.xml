@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="view_form_sale_order_extend" model="ir.ui.view">
+    <field name="name">Order: add Turns</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form" />
+    <field name="arch" type="xml" />
+
+    <group name="partner_details" position="inside">
+      <field name="IdTurno"/>
+    </group>
+  </record>
+</odoo>

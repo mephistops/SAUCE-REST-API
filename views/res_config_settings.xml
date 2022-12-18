@@ -14,7 +14,7 @@
           <button string="Clientes" type="object" name="clients" class="oe_highlight m-2" />
           <button string="Productos" type="object" name="products" class="oe_highlight m-2" />
           <button string="Facturas" type="object" name="sale_orders" class="oe_highlight m-2" />
-          <button string="Tipos de Pago" type="object" name="payments_types" class="oe_highlight m-2"/>
+          <button string="Tipos de Pago" type="object" name="payments_types" class="oe_highlight m-2" />
         </header>
         <group name="Informacion">
           <field name="IdEstacion" />
@@ -25,6 +25,7 @@
       </form>
     </field>
   </record>
+
   <record id="gas_api_tree" model="ir.ui.view">
     <field name="name">Gas_api_view_tree</field>
     <field name="model">gas.api</field>
@@ -44,40 +45,9 @@
     <field name="view_mode">tree,form</field>
   </record>
 
-
-  <record id="supply_points_action" model="ir.actions.act_window">
-    <field name="name">Islas</field>
-    <field name="res_model">supply.points</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-
-  <record id="turns_action" model="ir.actions.act_window">
-    <field name="name">Turnos</field>
-    <field name="res_model">turns</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-
-  <record id="gas_suppliers_action" model="ir.actions.act_window">
-    <field name="name">Surtidores</field>
-    <field name="res_model">gas.suppliers</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-
-  <record id="petrol_pumps_action" model="ir.actions.act_window">
-    <field name="name">Estaciones de Bombeo</field>
-    <field name="res_model">petrol.pumps</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-
   <menuitem id="test_menu_root" name="Sauce">
     <menuitem id="test_first_level_menu_2" name="SAUCE - API">
       <menuitem id="action_gas_api" action="gas_api_process_form_1" />
-    </menuitem>  
-    <menuitem id="test_first_level_menu" name="Acciones">
-      <menuitem id="action_petrol_pumps" action="petrol_pumps_action" />
-      <menuitem id="supply_points_action_menu_action" action="supply_points_action" />
-      <menuitem id="action_gas_suppliers" action="gas_suppliers_action" />
-      <menuitem id="turns_action_menu_action" action="turns_action" />
     </menuitem>
   </menuitem>
 </odoo>
