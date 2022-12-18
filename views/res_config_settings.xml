@@ -16,13 +16,13 @@
           <button string="Facturas" type="object" name="sale_orders" class="oe_highlight m-2" />
           <button string="Tipos de Pago" type="object" name="payments_types" class="oe_highlight m-2" />
         </header>
-        
+
         <group name="Informacion">
           <field name="IdEstacion" />
           <field name="Cliente_final" />
-          <field name="fecha" />
+          <field name="fechainicio" />
+          <field name="fechafinal" />
           <field name="flow" />
-          <field name="IdTurno" />
         </group>
       </form>
     </field>
@@ -35,9 +35,9 @@
       <tree>
         <field name="IdEstacion" />
         <field name="Cliente_final" />
-        <field name="fecha" />
+          <field name="fechainicio" />
+          <field name="fechafinal" />
         <field name="flow" />
-        <field name="IdTurno" />
       </tree>
     </field>
   </record>

@@ -12,15 +12,16 @@ class gasApi(models.Model):
 
     IdEstacion = fields.Many2one('petrol.pumps', string="Estación")
     Cliente_final = fields.Many2one('res.partner', string="Cliente")
-    fecha = fields.Date('Fecha de Documento')
+    fechainicio = fields.Date('Fecha de Inicio')
+    fechafinal = fields.Date('Fecha Final')
     flow = fields.Many2one('sale.workflow.process', string="Flujo")
-    IdTurno = fields.Many2many('turns',string="Turno")
+    IdTurno = fields.Many2many('turns', string="Turno")
 
     def name_get(self):
         rec = []
         for recs in self:
             name = '%s - %s ' % (recs.IdEstacion.Nombre or '',
-                                recs.flow.name or '')
+                                 recs.flow.name or '')
             rec += [(recs.id, name)]
         return rec
 
@@ -214,54 +215,59 @@ class gasApi(models.Model):
                 })
 
     def sale_orders(self):
-        fecha = self.fecha
+        fechainicio = self.fechainicio
+        fechafinal = self.fechafinal
+
         estaciones_code = self.IdEstacion.IdEstacion
-        data = self.get_data(
-            f"/Estaciones/{estaciones_code}/ventas/date/{fecha}")
+        turnos = self.get_data(
+            f"/Estaciones/{estaciones_code}/turnos/date/apertura/{fechainicio}/{fechafinal}")
         values = ''
         sale_order = self.env['sale.order'].sudo()
         default_order = sale_order.default_get(values)
 
-        for venta in data['Resultado']:
-            empleado = self._get_empl(venta['Empleado'].get('IdEmpleado'))
-            product = self.env['product.template'].search(
-                [('CodProducto', '=', venta['Producto']['CodProducto'])])
-            date_order = venta['HoraInicio'].split('T')
-            partner = ''
-            if venta['Cliente'] == None:
-                partner = self.Cliente_final.id
-            else:
-                partner = self._get_partner(
-                    venta['Cliente'].get('NumeroDocumento'))
-            values = dict(default_order)
+        for turno in turnos['Resultado']:
+            ventas = self.get_data(f"/Turnos/{turno['IdTurno']}/ventas")
 
-            values.update({
-                'partner_id': partner,
-                'IdRegistroVenta': venta['IdRegistroVenta'],
-                'Recibo': venta['Recibo'],
-                'Placa': venta['Placa'],
-                'date_order': date_order[0],
-                'gas_api': self.id,
-                'ROM': venta['ROM'],
-                'CodSurtidor': venta['CodSurtidor'],
-                'IdVehiculo': venta['IdVehiculo'],
-                'LecturaInicial': venta['LecturaInicial'],
-                'LecturaFinal': venta['LecturaFinal'],
-                'IdEstacion': self.IdEstacion.id,
-                'workflow_process_id': self.flow.id,
-                'IdEmpleado': empleado,
-                'order_line': [(0, 0, {
-                    'product_id': product['id'],
-                    'name': product['name'],
-                    'product_uom': product['uom_id'].id,
-                    'price_subtotal': venta['Valor'],
-                    'product_uom_qty': venta['Cantidad'],
-                    'price_unit': venta['Precio'],
-                })],
-                'FormaDePago': venta['Pagos'][0].get('FormaPago'),
-                'IdTurno': turn
-            })
-            sale_order.create(values)
+            for venta in ventas['Resultado']:
+                empleado = self._get_empl(venta['Empleado'].get('IdEmpleado'))
+                product = self.env['product.template'].search(
+                    [('CodProducto', '=', venta['Producto']['CodProducto'])])
+                date_order = venta['HoraInicio'].split('T')
+                partner = ''
+                if venta['Cliente'] == None:
+                    partner = self.Cliente_final.id
+                else:
+                    partner = self._get_partner(
+                        venta['Cliente'].get('NumeroDocumento'))
+                values = dict(default_order)
+
+                values.update({
+                    'partner_id': partner,
+                    'IdRegistroVenta': venta['IdRegistroVenta'],
+                    'Recibo': venta['Recibo'],
+                    'Placa': venta['Placa'],
+                    'date_order': date_order[0],
+                    'gas_api': self.id,
+                    'ROM': venta['ROM'],
+                    'CodSurtidor': venta['CodSurtidor'],
+                    'IdVehiculo': venta['IdVehiculo'],
+                    'LecturaInicial': venta['LecturaInicial'],
+                    'LecturaFinal': venta['LecturaFinal'],
+                    'IdEstacion': self.IdEstacion.id,
+                    'workflow_process_id': self.flow.id,
+                    'IdEmpleado': empleado,
+                    'order_line': [(0, 0, {
+                        'product_id': product['id'],
+                        'name': product['name'],
+                        'product_uom': product['uom_id'].id,
+                        'price_subtotal': venta['Valor'],
+                        'product_uom_qty': venta['Cantidad'],
+                        'price_unit': venta['Precio'],
+                    })],
+                    'FormaDePago': venta['Pagos'][0].get('FormaPago'),
+                    'IdTurno': turno['IdTurno']
+                })
+                sale_order.create(values)
 
     def _get_partner(self, vat):
         partner = self.env['res.partner'].search_read([('vat', '=', vat)])
