@@ -19,5 +19,6 @@
         'views/gas_suppliers.xml',
         'views/supply_points.xml',
         'views/turns.xml',
+        'views/sale_order.xml',
     ],
 }
