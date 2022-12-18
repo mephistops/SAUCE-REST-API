@@ -21,6 +21,7 @@
           <field name="Cliente_final" />
           <field name="fecha" />
           <field name="flow" />
+          <field name="turns" />
         </group>
       </form>
     </field>
