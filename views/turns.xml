@@ -5,11 +5,9 @@
     <field name="model">turns</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="IdTurno"/>
-        <field name="NumeroTurno"/>
-        <field name="FinalizaConsignacionSobre"/>
-        <field name="AjustadoPorOperacion"/>
-        <field name="EsCerrado"/>
+        <field name="IdTurno" string="Id"/>
+        <field name="NumeroTurno" string="N° Turno"/>
+        <field name="EsCerrado" string="Cerrado?"/>
       </tree>
     </field>
   </record>

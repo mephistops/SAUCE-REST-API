@@ -16,6 +16,7 @@
           <button string="Facturas" type="object" name="sale_orders" class="oe_highlight m-2" />
           <button string="Tipos de Pago" type="object" name="payments_types" class="oe_highlight m-2" />
         </header>
+        
         <group name="Informacion">
           <field name="IdEstacion" />
           <field name="Cliente_final" />
@@ -42,13 +43,13 @@
   </record>
 
   <record id="gas_api_process_form_1" model="ir.actions.act_window">
-    <field name="name">Sauce Api</field>
+    <field name="name">Estación</field>
     <field name="res_model">gas.api</field>
     <field name="view_mode">tree,form</field>
   </record>
 
   <menuitem id="test_menu_root" name="Sauce">
-    <menuitem id="test_first_level_menu_2" name="SAUCE - API">
+    <menuitem id="test_first_level_menu_2" name="Estación">
       <menuitem id="action_gas_api" action="gas_api_process_form_1" />
     </menuitem>
   </menuitem>
