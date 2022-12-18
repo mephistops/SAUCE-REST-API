@@ -265,7 +265,7 @@ class gasApi(models.Model):
                         'price_unit': venta['Precio'],
                     })],
                     'FormaDePago': venta['Pagos'][0].get('FormaPago'),
-                    'IdTurno': turno['IdTurno']
+                    'IdTurno': [(6, 0, [turno['IdTurno']])]
                 })
                 sale_order.create(values)
 
