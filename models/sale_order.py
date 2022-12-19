@@ -3,7 +3,6 @@ from odoo import models, fields, _
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
-    _name = 'Ventas'
     
     IdRegistroVenta = fields.Char(string="Registro Venta")
     Recibo = fields.Char(string="Recibo")
