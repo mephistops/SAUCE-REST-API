@@ -8,7 +8,7 @@ class SaleOrder(models.Model):
     Recibo = fields.Char(string="Recibo")
     IdVehiculo = fields.Char(string="Vehiculo")
     Placa = fields.Char(string="Placa")
-    IdTurno = fields.Many2many('turns',string="Turno")
+    IdTurno = fields.Many2one('turns',string="Turno")
     IdManguera = fields.Many2one('turns',string="Manguera")
     IdEstacion = fields.Many2one('petrol.pumps',string="Estacion")
     LecturaInicial = fields.Char(string="Lectura Inicial")

@@ -230,6 +230,7 @@ class gasApi(models.Model):
 
             for venta in ventas['Resultado']:
                 empleado = self._get_empl(venta['Empleado'].get('IdEmpleado'))
+                turnos_ = self._get_turnos_ve(venta['IdTurno'])
                 product = self.env['product.template'].search(
                     [('CodProducto', '=', venta['Producto']['CodProducto'])])
                 date_order = venta['HoraInicio'].split('T')
@@ -265,7 +266,7 @@ class gasApi(models.Model):
                         'price_unit': venta['Precio'],
                     })],
                     'FormaDePago': venta['Pagos'][0].get('FormaPago'),
-                    'IdTurno': [(6, 0, [turno['IdTurno']])]
+                    'IdTurno': turnos_,
                 })
                 sale_order.create(values)
 
@@ -275,7 +276,17 @@ class gasApi(models.Model):
             return partner[0].get('id')
         else:
             return False
-
+        
+    def _get_turnos_ve(self, IdTurno):
+        if IdTurno:
+            Turno = self.env['turns'].search_read([('IdTurno', '=', IdTurno)])
+            if Turno:
+                return Turno[0].get('id')
+            else:
+                return False
+        else:
+            return False
+        
     def _get_empl(self, empleado):
         partner = self.env['hr.employee'].search_read(
             [('IdEmpleado', '=', empleado)])
