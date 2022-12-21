@@ -54,7 +54,7 @@
     <field name="view_mode">tree,form</field>
   </record>
 
-  <menuitem id="test_menu_root" name="Sauce">
+  <menuitem id="test_menu_root" name="Lavish SAUCE API">
     <menuitem id="test_first_level_menu_2" name="Estación">
       <menuitem id="action_gas_api" action="gas_api_process_form_1" />
       <menuitem id="action_void" action="void_form" />
