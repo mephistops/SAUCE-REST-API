@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "API SAUCE",
+    'name': "Lavish SAUCE Connect API",
     'summary': """Importación de Datos desde API SAUCE""",
     'description': """Importación de Datos desde API SAUCE""",
-    'author': "David Alejandro Soluciones",
+    'author': "Lavish Soft",
     'website': "##",
     'category': 'Products',
     'version': '1.0',

@@ -2,7 +2,7 @@
 from odoo import fields, models
 
 class Void(models.Model):
-    _name = 'Void'
+    _name = 'void'
     _description = 'Void'
 
     Binario = fields.Binary('Binario')
