@@ -8,3 +8,4 @@ from . import gas_suppliers
 from . import turns
 from . import hr_employees
 from . import product_template
+from . import void
