@@ -10,16 +10,4 @@
       </tree>
     </field>
   </record>
-
-  <record id="void_form" model="ir.actions.act_window">
-    <field name="name">Void</field>
-    <field name="res_model">void</field>
-    <field name="view_mode">tree,form</field>
-  </record>
-
-  <menuitem id="test_menu_root" name="Sauce">
-    <menuitem id="test_first_level_menu_3" name="Estación">
-      <menuitem id="action_gas_api" action="void_form" />
-    </menuitem>
-  </menuitem>
 </odoo>
