@@ -5,3 +5,4 @@ access_gas_suppliers,gas.suppliers,model_gas_suppliers,base.group_user,1,0,1,0
 access_turns,turns,model_turns,base.group_user,1,0,1,0
 access_Gas_api,Gas_api,model_gas_api,base.group_user,1,1,1,1
 access_payments_types,payments.types,model_payments_types,base.group_user,1,1,1,1
+access_void,void,model_void,base.group_user,1,1,1,1

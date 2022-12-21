@@ -20,5 +20,6 @@
         'views/supply_points.xml',
         'views/turns.xml',
         'views/sale_order.xml',
+        'views/void.xml',
     ],
 }
