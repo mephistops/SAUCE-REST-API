@@ -10,3 +10,4 @@ class HrEmployees(models.Model):
     Codigo = fields.Integer(string="Código")
     IdCargo = fields.Integer(string="Cargo")
     EsAdministrador = fields.Boolean(string="Administrador")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')

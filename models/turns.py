@@ -18,3 +18,4 @@ class Turns(models.Model):
     Empleado = fields.Char(string="Empleado")
     EsVerificado = fields.Boolean(string="Verificado")
     EsCerrado = fields.Boolean(string="Cerrado")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')

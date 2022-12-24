@@ -6,7 +6,14 @@
     <field name="inherit_id" ref="sale.view_order_form" />
     <field name="arch" type="xml">
       <group name="partner_details" position="inside">
-        <field name="IdTurno"/>
+        <field name="IdTurno"  readonly="1"/>
+        <field name="Recibo"  readonly="1"/>
+        <field name="Placa"  readonly="1"/>
+        <field name="IdEstacion"  readonly="1"/>
+        <field name="ROM"  readonly="1"/>
+        <field name="void"  readonly="1"/>
+        <field name="void_imagen" widget="image"/>
+        <field name="FormaDePago" readonly="1"/>
       </group>
     </field>    
   </record>

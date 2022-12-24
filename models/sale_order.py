@@ -23,6 +23,14 @@ class SaleOrder(models.Model):
     gas_api = fields.Many2one('gas.api','Venta desde Api')
     IdEmpleado = fields.Many2one('hr.employee',string="Empleado")
     FormaDePago = fields.Char(string="Tipo de Pago")
+    void = fields.Many2one('void','Voucher', compute='_computeVoid')
+    void_imagen = fields.Binary(related='void.Binario')
+    
+    def _computeVoid(self):
+        reservation_obj = self.env['void']
+        for unit in self:
+            reservations_id = reservation_obj.search([('Numero', '=', self.Recibo)], limit=1)  
+            unit.void = reservations_id.id
     
     def prepare_sales_order_vals(self,value):
         self.default_get(value)

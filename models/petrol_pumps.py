@@ -19,3 +19,4 @@ class PetrolPumps(models.Model):
     NombreGerente = fields.Char(string="Nombre de Gerente")
     IdCiudad = fields.Char(string="Ciudad")
     Nit = fields.Char(string="NIT")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')

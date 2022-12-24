@@ -11,3 +11,4 @@ class SupplyPoints(models.Model):
     Nombre = fields.Char(string="Nombre")
     IdEstacion = fields.Many2one('petrol.pumps',string="Estación")
     Estado = fields.Boolean(string="Estado")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')

@@ -12,6 +12,7 @@ class GasSuppliers(models.Model):
     Descripcion = fields.Char(string="Descripcion")
     IdIsla = fields.Many2one('supply.points',string="IdIsla")
     CodigoPCC = fields.Char(string="CodigoPCC")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')
 
 class PaymentsTypes(models.Model):
     _name = 'payments.types'
@@ -21,3 +22,4 @@ class PaymentsTypes(models.Model):
     IdFormaPago = fields.Char(string="Id", required=True, index=True)
     CodigoTerpel = fields.Char(string="Codigo Terpel", required=True)
     Descripcion = fields.Char(string="Descripcion")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')

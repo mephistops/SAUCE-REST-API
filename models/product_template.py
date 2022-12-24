@@ -8,4 +8,5 @@ class ProductTemplate(models.Model):
     IdUnidadMedida = fields.Char(string="Id Unidad de Medida")
     IdProducto = fields.Char(string="Id Producto")
     EsLiquido = fields.Boolean(string="Es Liquido")
+    gas_api = fields.Many2one('gas.api','Venta desde Api')
     

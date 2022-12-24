@@ -14,15 +14,70 @@
           <button string="Clientes" type="object" name="clients" class="oe_highlight m-2" />
           <button string="Productos" type="object" name="products" class="oe_highlight m-2" />
           <button string="Facturas" type="object" name="sale_orders" class="oe_highlight m-2" />
-          <button string="Tipos de Pago" type="object" name="payments_types" class="oe_highlight m-2" />
+          <button string="Tipos de Pago" type="object" name="payments_types"
+            class="oe_highlight m-2" />
         </header>
-
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button type="object"
+              name="view_reservations"
+              class="oe_stat_button"
+              icon="fa-book"
+              attrs="{'invisible': [('sale_count', '=', 0)]}">
+              <field name="sale_count" widget="statinfo" string="Ventas" />
+            </button>
+            <button type="object"
+              name="view_estaciones"
+              class="oe_stat_button"
+              icon="fa-book"
+              attrs="{'invisible': [('estaciones_count', '=', 0)]}">
+              <field name="estaciones_count" widget="statinfo" string="Estaciones" />
+            </button>
+            <button type="object"
+              name="view_supplier"
+              class="oe_stat_button"
+              icon="fa-book"
+              attrs="{'invisible': [('estaciones_count', '=', 0)]}">
+              <field name="suplier_count" widget="statinfo" string="Surtidores" />
+            </button>
+            <button type="object"
+              name="view_empleados"
+              class="oe_stat_button"
+              icon="fa-book"
+              widget="statinfo" string="Empleados" 
+            />
+            <button type="object"
+              name="view_islas"
+              class="oe_stat_button"
+              icon="fa-book"
+              widget="statinfo" string="Islas" 
+            />
+          </div>
+          <group name="Datos de conexion">
+            <field name="username" />
+            <field name="password" password="1" />
+          </group>
+          <group name="Informacion">
+            <field name="IdEstacion" />
+            <field name="Cliente_final" />
+            <field name="fechainicio" />
+            <field name="fechafinal" />
+            <field name="flow" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="sale_Voucher_view_form" model="ir.ui.view">
+    <field name="name">Voucher</field>
+    <field name="model">void</field>
+    <field name="arch" type="xml">
+      <form string="Voucher">
+        <group name="Datos">
+          <field name="Numero" />
+        </group>
         <group name="Informacion">
-          <field name="IdEstacion" />
-          <field name="Cliente_final" />
-          <field name="fechainicio" />
-          <field name="fechafinal" />
-          <field name="flow" />
+          <field name="Binario" widget="image" />
         </group>
       </form>
     </field>
@@ -35,8 +90,8 @@
       <tree>
         <field name="IdEstacion" />
         <field name="Cliente_final" />
-          <field name="fechainicio" />
-          <field name="fechafinal" />
+        <field name="fechainicio" />
+        <field name="fechafinal" />
         <field name="flow" />
       </tree>
     </field>
