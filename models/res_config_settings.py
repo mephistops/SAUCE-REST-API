@@ -11,31 +11,52 @@ class gasApi(models.Model):
     _name = 'gas.api'
     _description = 'GAS API'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    
+
     username = fields.Char(string="Usuario", required=True)
     password = fields.Char(string="Clave", required=True)
     IdEstacion = fields.Many2one('petrol.pumps', string="Estación")
     Cliente_final = fields.Many2one('res.partner', string="Cliente")
     fechainicio = fields.Date('Fecha de Inicio')
     fechafinal = fields.Date('Fecha Final')
-    #flow = fields.Many2one('sale.workflow.process', string="Flujo")
+    # flow = fields.Many2one('sale.workflow.process', string="Flujo")
     IdTurno = fields.Many2many('turns', string="Turno")
-    sale_count= fields.Integer(compute='_sale_count',string='Reservation Count',)
-    estaciones_count= fields.Integer(compute='_estaciones_count',string='Reservation Count',)
-    suplier_count= fields.Integer(compute='_gas_count',string='Reservation Count',)
-    
+    sale_count = fields.Integer(
+        compute='_sale_count', string='Reservation Count',)
+    estaciones_count = fields.Integer(
+        compute='_estaciones_count', string='Reservation Count',)
+    suplier_count = fields.Integer(
+        compute='_gas_count', string='Reservation Count',)
+    n_employees = fields.Integer(
+        compute='_employees_count', string='Número de Empleados')
+
     def _estaciones_count(self):
         reservation_obj = self.env['petrol.pumps']
         for unit in self:
-            reservations_ids = reservation_obj.search([('gas_api', '=', unit.id)])  
+            reservations_ids = reservation_obj.search(
+                [('gas_api', '=', unit.id)])
             unit.estaciones_count = len(reservations_ids)
-            
+
     def _sale_count(self):
         reservation_obj = self.env['sale.order']
         for unit in self:
-            reservations_ids = reservation_obj.search([('gas_api', '=', unit.id)])  
+            reservations_ids = reservation_obj.search(
+                [('gas_api', '=', unit.id)])
             unit.sale_count = len(reservations_ids)
-    
+
+    def _employees_count(self):
+        reservation_obj = self.env['hr.employee']
+        for unit in self:
+            reservations_ids = reservation_obj.search(
+                [('gas_api', '=', unit.id)])
+            unit.estaciones_count = len(reservations_ids)
+
+    def _gas_count(self):
+        reservation_obj = self.env['gas.suppliers']
+        for unit in self:
+            reservations_ids = reservation_obj.search(
+                [('gas_api', '=', unit.id)])
+            unit.suplier_count = len(reservations_ids)
+
     def name_get(self):
         rec = []
         for recs in self:
@@ -43,94 +64,95 @@ class gasApi(models.Model):
                                 recs.username or '')
             rec += [(recs.id, name)]
         return rec
-    
+
     def view_reservations(self):
         reservation_obj = self.env['sale.order']
         reservations_ids = reservation_obj.search([('gas_api', '=', self.ids)])
-        reservations=[]
-        for obj in reservations_ids: reservations.append(obj.id)
+        reservations = []
+        for obj in reservations_ids:
+            reservations.append(obj.id)
         return {
             'name': _('Ventas'),
             'domain': [('id', 'in', reservations)],
-            'view_type':'form',
-            'view_mode':'tree,form',
-            'res_model':'sale.order',
-            'type':'ir.actions.act_window',
-            'nodestroy':True,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'sale.order',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
             'view_id': False,
-            'target':'current',
+            'target': 'current',
         }
-    def _gas_count(self):
-        reservation_obj = self.env['gas.suppliers']
-        for unit in self:
-            reservations_ids = reservation_obj.search([('gas_api', '=', unit.id)])  
-            unit.suplier_count = len(reservations_ids) 
 
     def view_supplier(self):
         reservation_obj = self.env['gas.suppliers']
         reservations_ids = reservation_obj.search([('gas_api', '=', self.ids)])
-        reservations=[]
-        for obj in reservations_ids: reservations.append(obj.id)
+        reservations = []
+        for obj in reservations_ids:
+            reservations.append(obj.id)
         return {
             'name': _('Surtidores'),
             'domain': [('id', 'in', reservations)],
-            'view_type':'form',
-            'view_mode':'tree,form',
-            'res_model':'gas.suppliers',
-            'type':'ir.actions.act_window',
-            'nodestroy':True,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'gas.suppliers',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
             'view_id': False,
-            'target':'current',
-        }       
+            'target': 'current',
+        }
+
     def view_estaciones(self):
         reservation_obj = self.env['petrol.pumps']
         reservations_ids = reservation_obj.search([('gas_api', '=', self.ids)])
-        reservations=[]
-        for obj in reservations_ids: reservations.append(obj.id)
+        reservations = []
+        for obj in reservations_ids:
+            reservations.append(obj.id)
         return {
             'name': _('Estaciones'),
             'domain': [('id', 'in', reservations)],
-            'view_type':'form',
-            'view_mode':'tree,form',
-            'res_model':'petrol.pumps',
-            'type':'ir.actions.act_window',
-            'nodestroy':True,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'petrol.pumps',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
             'view_id': False,
-            'target':'current',
+            'target': 'current',
         }
-        
+
     def view_empleados(self):
         reservation_obj = self.env['hr.employee']
         reservations_ids = reservation_obj.search([('gas_api', '=', self.ids)])
-        reservations=[]
-        for obj in reservations_ids: reservations.append(obj.id)
+        reservations = []
+        for obj in reservations_ids:
+            reservations.append(obj.id)
         return {
             'name': _('Empleados'),
             'domain': [('id', 'in', reservations)],
-            'view_type':'form',
-            'view_mode':'tree,form',
-            'res_model':'hr.employee',
-            'type':'ir.actions.act_window',
-            'nodestroy':True,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'hr.employee',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
             'view_id': False,
-            'target':'current',
+            'target': 'current',
         }
-        
+
     def view_islas(self):
         reservation_obj = self.env['supply.points']
         reservations_ids = reservation_obj.search([('gas_api', '=', self.ids)])
-        reservations=[]
-        for obj in reservations_ids: reservations.append(obj.id)
+        reservations = []
+        for obj in reservations_ids:
+            reservations.append(obj.id)
         return {
             'name': _('Islas'),
             'domain': [('id', 'in', reservations)],
-            'view_type':'form',
-            'view_mode':'tree,form',
-            'res_model':'supply.points',
-            'type':'ir.actions.act_window',
-            'nodestroy':True,
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'supply.points',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
             'view_id': False,
-            'target':'current',
+            'target': 'current',
         }
     """Connect to API SAUCE"""
 
@@ -138,7 +160,7 @@ class gasApi(models.Model):
         url = f"https://api2.sauce.online/api/{data}"
 
         response = requests.get(url,
-                                #auth=("Consultastamaria", "123456789"),
+                                # auth=("Consultastamaria", "123456789"),
                                 auth=(self.username, self.password),
                                 headers={'Content-Type': 'application/json'},
                                 )
@@ -326,10 +348,10 @@ class gasApi(models.Model):
                     'IdProducto': product['IdProducto'],
                     'EsLiquido': product['EsLiquido']
                 })
-                
+
     def sale_orders(self):
         fechainicio = self.fechainicio
-        fechafinal = self.fechafinal    
+        fechafinal = self.fechafinal
 
         estaciones_code = self.IdEstacion.IdEstacion
         turnos = self.get_data(
@@ -342,24 +364,34 @@ class gasApi(models.Model):
             ventas = self.get_data(f"/Turnos/{turno['IdTurno']}/ventas")
             if "Resultado" in ventas:
                 for venta in ventas['Resultado']:
-                    order = self.env['sale.order'].search([('IdRegistroVenta', '=', venta['IdRegistroVenta'])])
+                    order = self.env['sale.order'].search(
+                        [('IdRegistroVenta', '=', venta['IdRegistroVenta'])])
                     if not order:
                         empleado = self._get_empl(venta['Empleado'].get('IdEmpleado'),
-                                                venta['Empleado'].get('Nombre'),
-                                                venta['Empleado'].get('Cedula'),
-                                                venta['Empleado'].get('EsActivo'),
-                                                venta['Empleado'].get('Codigo'),
-                                                venta['Empleado'].get('Idcargo'),
-                                                venta['Empleado'].get('EsAdministrador'),
-                                                )
+                                                  venta['Empleado'].get(
+                                                      'Nombre'),
+                                                  venta['Empleado'].get(
+                                                      'Cedula'),
+                                                  venta['Empleado'].get(
+                                                      'EsActivo'),
+                                                  venta['Empleado'].get(
+                                                      'Codigo'),
+                                                  venta['Empleado'].get(
+                                                      'Idcargo'),
+                                                  venta['Empleado'].get(
+                                                      'EsAdministrador'),
+                                                  )
                         turnos_ = self._get_turnos_ve(venta['IdTurno'])
-                        product = self.env['product.template'].search([('CodProducto', '=', venta['Producto']['CodProducto'])])
+                        product = self.env['product.template'].search(
+                            [('CodProducto', '=', venta['Producto']['CodProducto'])])
                         date_order = venta['HoraInicio'].split('T')
-                        #fecha = date_order[0]
+                        # fecha = date_order[0]
                         hora = date_order[1].split('.')
                         date_formatted = date_order[0] + " " + hora[0]
-                        date_formatted = datetime.strptime(date_formatted, '%Y-%m-%d %H:%M:%S') + timedelta(hours=5)
-                        payment_type = self.env['payments.types'].search([('IdFormaPago', '=', venta['Pagos'][0].get('IdFormaPago'))])
+                        date_formatted = datetime.strptime(
+                            date_formatted, '%Y-%m-%d %H:%M:%S') + timedelta(hours=5)
+                        payment_type = self.env['payments.types'].search(
+                            [('IdFormaPago', '=', venta['Pagos'][0].get('IdFormaPago'))])
                         partner = ''
                         if venta['Cliente'] == None:
                             partner = self.Cliente_final.id
@@ -368,12 +400,14 @@ class gasApi(models.Model):
                                 venta['Cliente'].get('NumeroDocumento'))
                         isla = ''
                         if venta['IdIsla']:
-                            isla = self.env['supply.points'].search([('IdIsla', '=', venta['IdIsla'])])
+                            isla = self.env['supply.points'].search(
+                                [('IdIsla', '=', venta['IdIsla'])])
                         else:
                             isla = False
                         surtidor = ''
                         if venta['IdSurtidor']:
-                            surtidor = self.env['gas.suppliers'].search([('IdSurtidor', '=', venta['IdSurtidor'])])
+                            surtidor = self.env['gas.suppliers'].search(
+                                [('IdSurtidor', '=', venta['IdSurtidor'])])
                         else:
                             surtidor = False
                         values = dict(default_order)
@@ -407,9 +441,11 @@ class gasApi(models.Model):
                         })
                         sale_order.create(values)
                     else:
-                        self.message_post(body=_("El recibo <b>%s<b> Ya existen en Ventas Como la orden <b>%s<b>", order.Recibo, order.name))
+                        self.message_post(body=_(
+                            "El recibo <b>%s<b> Ya existen en Ventas Como la orden <b>%s<b>", order.Recibo, order.name))
             else:
-                self.message_post(body=_("No se pudo generar la ventas de este turno <b>%s<b> No existen Ventas", turno['IdTurno'] ))
+                self.message_post(body=_(
+                    "No se pudo generar la ventas de este turno <b>%s<b> No existen Ventas", turno['IdTurno']))
 
     def _get_partner(self, vat):
         partner = self.env['res.partner'].search_read([('vat', '=', vat)])
@@ -417,7 +453,7 @@ class gasApi(models.Model):
             return partner[0].get('id')
         else:
             return False
-        
+
     def _get_turnos_ve(self, IdTurno):
         if IdTurno:
             Turno = self.env['turns'].search_read([('IdTurno', '=', IdTurno)])
@@ -427,13 +463,15 @@ class gasApi(models.Model):
                 turns = self.env['turns']
                 data = self.get_data(f"Turnos/{IdTurno}")
                 estacion_id = data['IdEstacion'] or ''
-                estacion = self.env['petrol.pumps'].search_read([('IdEstacion', '=', estacion_id)])
-                empleado = self.env['hr.employee'].search_read([('IdEmpleado', '=', data['IdEmpleado'])])
+                estacion = self.env['petrol.pumps'].search_read(
+                    [('IdEstacion', '=', estacion_id)])
+                empleado = self.env['hr.employee'].search_read(
+                    [('IdEmpleado', '=', data['IdEmpleado'])])
                 exists = turns.search([('IdTurno', '=', data['IdTurno'])])
                 if len(exists) == 0:
                     turns.create({
                         'IdTurno': data['IdTurno'],
-                        #'IdEmpleado': empleado[0].get('id'),
+                        # 'IdEmpleado': empleado[0].get('id'),
                         'IdEstacion': estacion[0].get('id'),
                         'Apertura': data['Apertura'],
                         'Cierre': data['Cierre'],
@@ -444,7 +482,7 @@ class gasApi(models.Model):
                         'EsConsolidado': data['EsConsolidado'],
                         'Empleado': data['Empleado'],
                         'EsVerificado': data['EsVerificado'],
-                        #'EsCerrado': data['EsCerrado']
+                        # 'EsCerrado': data['EsCerrado']
                     })
             return turns.id
         else:
@@ -476,10 +514,11 @@ class gasApi(models.Model):
                             'EsCerrado': turnos['EsCerrado']
                         })
             return turns.id
-        
+
     def _get_empl(self, empleado, Nombre, Cedula, EsActivo, Codigo, Idcargo, EsAdministrador):
         employees = self.env['hr.employee']
-        partner = self.env['hr.employee'].search_read([('IdEmpleado', '=', empleado)])
+        partner = self.env['hr.employee'].search_read(
+            [('IdEmpleado', '=', empleado)])
         if partner:
             return partner[0].get('id')
         else:
@@ -488,7 +527,7 @@ class gasApi(models.Model):
                 employees.create({
                     'name': Nombre,
                     'IdEmpleado': empleado,
-                    'Cedula': Cedula ,
+                    'Cedula': Cedula,
                     'EsActivo': EsActivo,
                     'Codigo': Codigo,
                     'gas_api': self.id,

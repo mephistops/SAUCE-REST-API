@@ -9,13 +9,13 @@
           <button string="Estaciones" type="object" name="petrol_pumps" class="oe_highlight m-2" />
           <button string="Islas" type="object" name="supply_points" class="oe_highlight m-2" />
           <button string="Surtidores" type="object" name="gas_suppliers" class="oe_highlight m-2" />
-          <button string="Empleados" type="object" name="employees_sauce" class="oe_highlight m-2" />
-          <button string="Turnos" type="object" name="turns" class="oe_highlight m-2" />
+          <button string="Tipos de Pago" type="object" name="payments_types"  class="oe_highlight m-2" />
+          <!--<button string="Empleados" type="object" name="employees_sauce" class="oe_highlight m-2" />-->
+          <!--<button string="Turnos" type="object" name="turns" class="oe_highlight m-2" />-->
           <button string="Clientes" type="object" name="clients" class="oe_highlight m-2" />
           <button string="Productos" type="object" name="products" class="oe_highlight m-2" />
           <button string="Facturas" type="object" name="sale_orders" class="oe_highlight m-2" />
-          <button string="Tipos de Pago" type="object" name="payments_types"
-            class="oe_highlight m-2" />
+          
         </header>
         <sheet>
           <div class="oe_button_box" name="button_box">
@@ -44,8 +44,9 @@
               name="view_empleados"
               class="oe_stat_button"
               icon="fa-book"
-              widget="statinfo" string="Empleados"
-            />
+              attrs="{'invisible': [('n_employees', '=', 0)]}">
+              <field name="n_employees" widget="statinfo" string="Empleados" />
+            </button>
             <button type="object"
               name="view_islas"
               class="oe_stat_button"
