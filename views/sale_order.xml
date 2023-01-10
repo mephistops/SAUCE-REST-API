@@ -5,16 +5,46 @@
     <field name="model">sale.order</field>
     <field name="inherit_id" ref="sale.view_order_form" />
     <field name="arch" type="xml">
-      <group name="partner_details" position="inside">
-        <field name="IdTurno"  readonly="1"/>
-        <field name="Recibo"  readonly="1"/>
-        <field name="Placa"  readonly="1"/>
-        <field name="IdEstacion"  readonly="1"/>
-        <field name="ROM"  readonly="1"/>
-        <field name="void"  readonly="1"/>
-        <field name="void_imagen" widget="image"/>
-        <field name="FormaDePago" readonly="1"/>
-      </group>
-    </field>    
+      <xpath expr="//page[2]" position="after">
+        <page name="automation_information" string="Información de automatización">
+          <group name="workflow">
+            <field name="IdTurno" readonly="1" />
+            <field name="Recibo" readonly="1" />
+            <field name="Placa" readonly="1" />
+            <field name="IdIsla" readonly="1" />
+            <field name="IdSurtidor" readonly="1" />
+            <field name="IdEstacion" readonly="1" />
+            <field name="ROM" readonly="1" />
+            <field name="FormaDePago" readonly="1" />
+          </group>
+          <group name="workflow">
+            <field name="void" readonly="1" />
+            <field name="void_imagen" widget="image" />
+          </group>
+        </page>
+      </xpath>
+    </field>
+  </record>
+  <record id="invoice_form_sales" model="ir.ui.view">
+    <field name="name">related.sales.account.invoice.form</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='invoice_date']" position="after">
+        <field name="Print_void" />
+      </xpath>
+      <xpath expr="//page[@name='other_info']" position="after">
+        <page string="informacion Sauce" name="info_sauce">
+          <field name="sale_order_ids">
+            <tree string="">
+              <field name="name" readonly="1" />
+              <field name="date_order" readonly="1" />
+              <field name="void" readonly="1" />
+              <field name="void_imagen" widget="image" />
+            </tree>
+          </field>
+        </page>
+      </xpath>
+    </field>
   </record>
 </odoo>

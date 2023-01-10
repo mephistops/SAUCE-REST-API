@@ -44,13 +44,13 @@
               name="view_empleados"
               class="oe_stat_button"
               icon="fa-book"
-              widget="statinfo" string="Empleados" 
+              widget="statinfo" string="Empleados"
             />
             <button type="object"
               name="view_islas"
               class="oe_stat_button"
               icon="fa-book"
-              widget="statinfo" string="Islas" 
+              widget="statinfo" string="Islas"
             />
           </div>
           <group name="Datos de conexion">
@@ -62,9 +62,13 @@
             <field name="Cliente_final" />
             <field name="fechainicio" />
             <field name="fechafinal" />
-            <field name="flow" />
           </group>
         </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids"/>
+          <field name="activity_ids"/>
+          <field name="message_ids"/>
+      </div>
       </form>
     </field>
   </record>
@@ -92,7 +96,38 @@
         <field name="Cliente_final" />
         <field name="fechainicio" />
         <field name="fechafinal" />
-        <field name="flow" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="sale_Tipos_de_Pago_view_form" model="ir.ui.view">
+    <field name="name">Tipos de Pago</field>
+    <field name="model">payments.types</field>
+    <field name="arch" type="xml">
+      <form string="Tipos de Pago">
+        <group name="Tipos de Pago" string="string">
+          <field name="IdFormaPago" />
+          <field name="CodigoTerpel" />
+          <field name="Descripcion" />
+          <field name="gas_api" />
+          <field name="payment_term" />
+          <field name="Cliente_final" />
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="sale_Tipos_de_Pago_view_tree" model="ir.ui.view">
+    <field name="name">Tipos de Pago</field>
+    <field name="model">payments.types</field>
+    <field name="arch" type="xml">
+      <tree string="Tipos de Pago">
+        <field name="IdFormaPago" />
+        <field name="CodigoTerpel" />
+        <field name="Descripcion" />
+        <field name="gas_api" />
+        <field name="payment_term" />
+        <field name="Cliente_final" />
       </tree>
     </field>
   </record>
@@ -108,11 +143,22 @@
     <field name="res_model">void</field>
     <field name="view_mode">tree,form</field>
   </record>
+  <record id="payment_gas" model="ir.actions.act_window">
+    <field name="name">Tipos de pagos</field>
+    <field name="res_model">payments.types</field>
+    <field name="view_mode">tree,form</field>
+  </record>
 
-  <menuitem id="test_menu_root" name="Lavish SAUCE API">
-    <menuitem id="test_first_level_menu_2" name="Estación">
+
+  <menuitem id="test_menu_root" name="Sauce" web_icon="SAUCE-REST-API,static/description/icon.png">
+    <menuitem id="test_first_level_menu_2" name="Estación" sequence="0">
       <menuitem id="action_gas_api" action="gas_api_process_form_1" />
-      <menuitem id="action_void" action="void_form" />
     </menuitem>
+    <menuitem id="test_first_level_menu_1" name="Configuracion" sequence="1">
+      <menuitem id="payment_gas_1" action="payment_gas" />
+    </menuitem>
+  </menuitem>
+  <menuitem id="action_void" name="Tickets" action="void_form"
+    web_icon="SAUCE-REST-API,static/description/icon_tickets.png">
   </menuitem>
 </odoo>
