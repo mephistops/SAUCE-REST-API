@@ -9,3 +9,4 @@ from . import turns
 from . import hr_employees
 from . import product_template
 from . import void
+from . import payments_types
