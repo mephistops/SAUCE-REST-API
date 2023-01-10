@@ -36,13 +36,13 @@ class SaleOrder(models.Model):
     def prepare_sales_order_vals(self,value):
         self.default_get(value)
     
-    @api.ondelete(at_uninstall=False)
-    def _unlink_except_draft_or_cancel(self):
-        for order in self:
-            if order.state not in ('draft', 'cancel'):
-                raise UserError(_('You can not delete a sent quotation or a confirmed sales order. You must first cancel it.'))
-            if order.gas_api:
-                raise UserError(_('No puede borrar una orden creada desde sauce'))
+    #@api.ondelete(at_uninstall=False)
+    #def _unlink_except_draft_or_cancel(self):
+        #for order in self:
+            #if order.state not in ('draft', 'cancel'):
+                #raise UserError(_('You can not delete a sent quotation or a confirmed sales order. You must first cancel it.'))
+            #if order.gas_api:
+                #raise UserError(_('No puede borrar una orden creada desde sauce'))
 
 class AccountMove(models.Model):
     _inherit = "account.move"
