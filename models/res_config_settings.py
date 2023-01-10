@@ -48,7 +48,7 @@ class gasApi(models.Model):
         for unit in self:
             reservations_ids = reservation_obj.search(
                 [('gas_api', '=', unit.id)])
-            unit.estaciones_count = len(reservations_ids)
+            unit.n_employees = len(reservations_ids)
 
     def _gas_count(self):
         reservation_obj = self.env['gas.suppliers']
