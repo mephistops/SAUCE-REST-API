@@ -10,7 +10,7 @@
     'depends': [
         'hr',
         'sale',
-        #'sale_automatic_workflow',
+        'sale_automatic_workflow',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -19,7 +19,6 @@
         'views/gas_suppliers.xml',
         'views/supply_points.xml',
         'views/turns.xml',
-        'views/report.xml',
         'views/sale_order.xml',
         'views/void.xml',
     ],
